@@ -30,7 +30,7 @@ jobs:
           pytest test_battery.py --spec -v
 
   system-tests:
-    name: Run System Tests (MyDB)
+    name: Run System Tests (SimpleDB)
     runs-on: ubuntu-latest
 
     steps:
