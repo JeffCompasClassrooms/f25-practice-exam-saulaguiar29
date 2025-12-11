@@ -49,4 +49,4 @@ jobs:
 
       - name: Run system tests for MyDB
         run: |
-          pytest test_mydb.py --spec -v
+          pytest test2.py --spec -v
