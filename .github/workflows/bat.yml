@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: CI - Unit and System Tests
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  unit-tests:
+    name: Run Unit Tests (Battery)
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +25,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-spec pytest-describe pytest-mock
 
-      - name: Run unit tests
+      - name: Run unit tests for Battery
+        run: |
+          pytest test_battery.py --spec -v
+
+  system-tests:
+    name: Run System Tests (MyDB)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-spec pytest-describe pytest-mock
+
+      - name: Run system tests for MyDB
         run: |
           pytest test_mydb.py --spec -v
